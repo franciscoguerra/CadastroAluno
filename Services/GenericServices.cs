@@ -2,7 +2,6 @@
 using CadastroAluno.Models;
 using CadastroAluno.Services.IServices;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using System.Data.Entity;
 
 namespace CadastroAluno.Services
 {

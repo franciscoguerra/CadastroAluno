@@ -1,5 +1,6 @@
 ﻿using CadastroAluno.Models;
 using CadastroAluno.Services.IServices;
+using CadastroAluno.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -64,12 +65,18 @@ namespace CadastroAluno.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult<CursoModel>> Create(CursoModel cursoModel)
+        public async Task<ActionResult<CursoModel>> Create(CursoViewModel cursoViewModel)
         {
+            var cursoModel = new CursoModel
+            {
+                NomeCurso = cursoViewModel.NomeCurso,
+                QtdModulos = cursoViewModel.QtdsModulos
+            };
             try
             {
                 await _serviceCursos.CreateCurso(cursoModel);
-                return CreatedAtRoute(nameof(GetCursos), new {id = cursoModel.Id},cursoModel);
+                return Ok(cursoModel);
+                //return CreatedAtRoute(nameof(GetCursos), new {id = cursoModel.Id},cursoModel);
             }
             catch (Exception)
             {

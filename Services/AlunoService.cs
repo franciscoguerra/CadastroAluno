@@ -2,7 +2,7 @@
 using CadastroAluno.Models;
 using CadastroAluno.Services.IServices;
 using System.Collections.Generic;
-using System.Data.Entity;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http.HttpResults;

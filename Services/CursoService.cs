@@ -1,8 +1,9 @@
 ﻿using CadastroAluno.Context;
 using CadastroAluno.Models;
 using CadastroAluno.Services.IServices;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System.Data.Entity;
+
 
 namespace CadastroAluno.Services
 {
@@ -14,7 +15,6 @@ namespace CadastroAluno.Services
         {
             _contextCurso = contextCurso;
             _logger = logger;
-
         }
 
         public async Task<IEnumerable<CursoModel>> GetCursos()
@@ -36,7 +36,7 @@ namespace CadastroAluno.Services
             IEnumerable<CursoModel> curso;
             if(!string.IsNullOrEmpty(name))
             {
-                curso = _contextCurso.Cursos.Where(n=>n.Nome.Contains(name)).ToList();
+                curso = _contextCurso.Cursos.Where(n=>n.NomeCurso.Contains(name)).ToList();
             }
             else
             {
@@ -57,7 +57,6 @@ namespace CadastroAluno.Services
             await _contextCurso.SaveChangesAsync(); 
         }
 
-      
         public async Task UpdateCurso(CursoModel curso)
         {
            _contextCurso.Entry(curso).State = Microsoft.EntityFrameworkCore.EntityState.Modified;

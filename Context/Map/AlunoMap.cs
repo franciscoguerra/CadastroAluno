@@ -1,7 +1,7 @@
 ﻿using CadastroAluno.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Data.Entity.ModelConfiguration;
+
 
 namespace CadastroAluno.Context.Map
 {

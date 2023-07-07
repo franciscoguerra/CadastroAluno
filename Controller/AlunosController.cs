@@ -1,6 +1,7 @@
 ﻿using CadastroAluno.Models;
 using CadastroAluno.Services;
 using CadastroAluno.Services.IServices;
+using CadastroAluno.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CadastroAluno.Controller
@@ -84,18 +85,29 @@ namespace CadastroAluno.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(AlunoModel alunoModel)
+        public async Task<ActionResult> Create(AlunoViewModel alunoViewModel)
         {
+            var alunoModel = new AlunoModel
+            {
+                FirstNome = alunoViewModel.FirstNome,
+                LastName = alunoViewModel.LastName,
+                CertidaoNascimento = alunoViewModel.CertidaoNascimento,
+                CPF= alunoViewModel.CPF,
+                NomeMae = alunoViewModel.NomeMae,
+                NomePai = alunoViewModel.NomePai,
+                Status = alunoViewModel.Status,
+            };
             try
             {
+                
                 await _servicesAluno.CreateAluno(alunoModel);
-                return CreatedAtRoute(nameof(GetAlunos), new {id = alunoModel.Id}, alunoModel);
-
+                return Ok(alunoModel);
+                //return CreatedAtRoute(nameof(GetAlunos), new {id = alunoModel.Id}, alunoModel);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                return BadRequest("Request Invalido");
+                return BadRequest(ex);
             }
         }
 

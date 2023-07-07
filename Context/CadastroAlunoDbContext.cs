@@ -11,16 +11,14 @@ namespace CadastroAluno.Context
         {
         }
 
-
         public DbSet<AlunoModel> Alunos { get; set; }
         public DbSet<CursoModel> Cursos { get; set; }
         public DbSet<TurmaModel> Turmas { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=127.0.0.1;Database=CadastroAlunoNovo;User Id=sa;Password=Deusmeam@27;TrustServerCertificate=true;");
-
-            
+            optionsBuilder.UseSqlServer("Server=127.0.0.1;Database=CadastroAlunoNovo;User Id=sa;Password=Deusmeam@27;TrustServerCertificate=true;");  
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,7 +32,10 @@ namespace CadastroAluno.Context
                 .HasOne(t => t.Curso)
                 .WithMany(c => c.Turmas)
                 .HasForeignKey(t => t.CursoId);
-        }
 
+            modelBuilder.Entity<CursoModel>()
+                .Property(c => c.QtdModulos);
+
+        }
     }
 }
